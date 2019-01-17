@@ -31,3 +31,63 @@
  * Views 视图，即网页，也是MVC中V的全称，我们一般看到的网页都是.html，打开文件Views再打开Home下的文件发现文件名是以.cshtml结尾的，这是MVC应用程序下网页的扩展名。一个cshtml文件就代表了一个网页。其中还有一个是Shared文件，这是有关默认网页和错误信息的网页，即出现程序错误所要转到的界面和主视图。
  
  * 剩余的其他都是关于网站的配置文件，不要删除和随意改动，网站的运行需要靠这些来完成操作。
+
+## :beginner:控制器 ##
+
+在MVC体系中，传入的请求是由控制器处理的，在ASP .NET MVC中，控制器只是一个简单的C#类，看以下代码：
+
+```C#
+using System.Web;
+using System.Web.Mvc;
+
+namespace Demo.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+    }
+}
+```
+先看public class HomeController : Controller这句代码，意为HomeController这个类继承了Controller这个控制器类的所用方法与属性，也是HomeController这个类具有控制器的原因。看这个类中的方法含有3个 Index， About，Contact方法。返回值又是View()，代表了这三个方法其实是渲染了三个界面，打开Views中的Home文件，你也能发现它所具有的三个界面和这三个方法命名相同，也就是说，你的视图每有一个视图，就需要一个ActionResult类型的方法来渲染它。那么是不是没每一个方法都需要一个视图呢？当然不是这样的，观察上面的三个方法他们都是ActionResult类型为返回值的方法，返回值为View()就代表默认返回到以该方法命名的视图
+如上面三种，方法名是什么，返回的视图就是什么，如果没有这个视图，就会出现错误，当然我们想不用这个名字返回该名字的视图可以像下面这样写：
+
+```C# 
+        public ActionResult OtherName()
+        {
+            return View("Index");
+        }
+```
+
+如果调用这个方法就会转到Index界面，你可能又会问，我该怎样调用这个方法呢？下面介绍一下路由：
+
+## :beginner:理解路由 ##
+
+路由系统决定了如何把Url映射到特定的控制器上，也是网页跳转和方法处理的必须所用到条件，举例来说，我们想运行Index界面，需要点击打开这个界面，再点击运行（crtl+F5）这个界面才能看到该网页，如下：
+
+
+
+
+
+
+
+
+
+
+
