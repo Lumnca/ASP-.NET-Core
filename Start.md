@@ -104,11 +104,19 @@ namespace Demo.Controllers
 
 ## :beginner:视图 ##
 
-一开始创建的ASP.NET程序会自带一个Home文件和三个视图文件，你可以删除掉这三个视图文件，但这个Home的文件夹以及Home所对应的控制器就不要删除了，否者要修改需要信息才能使程序运行，因为网站很多默认的功能都是绑定到Home控制器以及Home下视图的，最简单的方法就是我们可以新建立一个和Home一样的视图文件夹：
+一开始创建的ASP.NET程序会自带一个Home文件和三个视图文件，你可以删除掉这三个视图文件，但这个Home的文件夹以及Home所对应的控制器就不要删除了，否者要修改需要信息才能使程序运行，因为网站很多默认的功能都是绑定到Home控制器以及Home下视图的，最简单的方法就是我们可以新建立一个和Home一样的视图文件夹，右击Views文件点击新建一个文件夹，并命名为Myweb如下
 
+![](https://github.com/Lumnca/MVC/blob/master/Images/b5.png)
 
+再右击这个文件夹添加视图，如果不采用布局形式页，就可以点击下面这个视图选项：
 
+![](https://github.com/Lumnca/MVC/blob/master/Images/b6.png)
 
+再给你的视图命名，我命名为Index，可以和Home下的文件同样的命名，但是不能在同一个文件夹下命名相同的文件，Home与Index文件夹不同所以可以命名Home下的文件名。然后出现一个cshtml界面，就表示页面创建成功了。你可以在这个页面上添加Html文档。
+
+那么我们想使用这个视图怎么办，打开这个网页，并运行一下，会发现这是不行的，为什么，上一节我们说的路由是控制器的映射，还记的那个路由格式吗？我们再看看一下这个路由格式：`localhost:62078/Home/Index` 。/Home/Index代表的是Home控制器下的Index方法。同理我们的这个视图需要一个 MyWeb控制器下的Index方法，即要使`localhost:62078/MyWeb/Index`有对应的映射。
+
+首先先创建一个名为MyWeb的控制器，右击控制器文件夹，
 
 
 
