@@ -116,12 +116,60 @@ namespace Demo.Controllers
 
 那么我们想使用这个视图怎么办，打开这个网页，并运行一下，会发现这是不行的，为什么，上一节我们说的路由是控制器的映射，还记的那个路由格式吗？我们再看看一下这个路由格式：`localhost:62078/Home/Index` 。/Home/Index代表的是Home控制器下的Index方法。同理我们的这个视图需要一个 MyWeb控制器下的Index方法，即要使`localhost:62078/MyWeb/Index`有对应的映射。
 
-首先先创建一个名为MyWeb的控制器，右击控制器文件夹，
+首先先创建一个名为MyWeb的控制器，右击控制器文件夹，点击添加一个控制器，如下：
+
+![](https://github.com/Lumnca/MVC/blob/master/Images/b7.png)
 
 
+在出现的界面中选择第一个 MVC 5 控制器-空 的那个选项，然后出现命名界面，由于我们的新建视图文件夹名为MyWeb，所以要一一映射，我们的控制器名为`MyWebController`注意Controller这个名称段必须含有，控制器名一般为 视图文件夹名 + Controller为格式的命名。点击确认后出现控制器代码：
 
+```C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
+namespace Demo.Controllers
+{
+    public class MyWebController : Controller
+    {
+        // GET: MyWeb
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+```
 
+由于控制器会自动创建一个Index方法，所以我们就可以不必自己创建。现在再打开MyWeb文件下的Index视图文件，点击运行，若能出现界面（Index界面含有显示的内容）就表示路由设置成功。同样的你想再MyWeb文件下添加一个其他界面如Other界面，那么首先你要做的就是现在MyWeb文件下创建视图，然后在MyWeb控制器下创建一个Other方法，如下代码：
+
+```C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Demo.Controllers
+{
+    public class MyWebController : Controller
+    {
+        // GET: MyWeb
+        public ActionResult Index()
+        {
+            return View();
+        }
+        //添加的Other界面
+        public ActionResult Other()
+        {
+            return View();
+        }
+    }
+}
+```
+然后再进入到Other界面点击运行，出现界面表示成功。你也可以在地址栏输入 `localhost:62078/控制器/控制器方法` 这种格式的地址来转到不同的界面。
 
 
 
