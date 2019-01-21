@@ -7,3 +7,5 @@ ASP .NET MVC 应用程序
 
 :checkered_flag:[视图](https://github.com/Lumnca/MVC/blob/master/%E8%A7%86%E5%9B%BE.md)
 
+:checkered_flag:[模型](https://github.com/Lumnca/MVC/blob/master/%E6%A8%A1%E5%9E%8B.md)
+
