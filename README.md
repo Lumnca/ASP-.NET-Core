@@ -16,6 +16,8 @@ ASP .NET Core
 
 :checkered_flag:[ASP .NET Core项目创建与结构](https://github.com/Lumnca/ASP-.NET-Core/blob/master/core%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA.md)
 
+:checkered_flag:[基本配置](https://github.com/Lumnca/ASP-.NET-Core/blob/master/%E5%9F%BA%E6%9C%AC%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE.md)
+
 
 
 
