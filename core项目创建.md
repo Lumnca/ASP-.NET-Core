@@ -4,7 +4,9 @@
 
 :one:[ASP .NET Core](#a1)
 
-:two:[ASP .NET Core创建](#a1)
+:two:[ASP .NET Core创建](#a2)
+
+:three:[ASP .NET Core结构](#a3)
 
 <p id="a1"></p>
 
@@ -78,4 +80,138 @@ Model: `数据模型，即数据类的存放地方`
 Views: `视图模型，即cshtml界面可以使用代码插入的HTML界面`
 
 其余的就是项目运行配置项类，后面使用到再做介绍。
+
+<p id="a1"></p>
+
+### :arrow_forward:ASP .NET Core结构 ### 
+
+:arrow_double_up:[返回目录](#t)
+
+**1.ASP.NET Core应用**
+
+在在Program.cs文件中，代码如下：
+
+```C#
+using System;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+
+namespace WebTest
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateWebHostBuilder(args).Build().Run();
+        }
+        
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
+    }
+}
+```
+
+Mian方法调用WebHost.CreateWebHostBuilder来生成了默认的Web主程序，生成服务器的启动类UseStartup，自动分配了Kestrel服务器，ASP .NET Core尝试在IIS上运行。对于其他Web服务器（Http.sys）可以通过调用相应的扩展方法来使用。
+
+**2.Startup**
+
+WebHostBuilder的UseStartup方法为应用程序指定了Startup类:
+
+```C#
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+    }
+```
+
+这个类中定义了请求处理管道和配置应用需要的服务。Startup类必须是公开的（public）并且必须包含如下方法：
+
+```C#
+public class Startup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+
+        }
+    }
+```
+
+ConfigureServices方法用于定义你的应用程序所使用的服务，Configure方法用于定义你的请求管道中的中间件。
+
+**3.服务**
+
+服务是应用中用于通用调用组件。服务通过依赖注入获取并使用。ASP .NET Core内置了一个简单的控制反转Ioc容器，它默认支持构造器注入，并且可以方便的替换成你自己选用的Ioc容器。由于它的松耦合特性，依赖注入DI使服务在整个应用程序中都可以使用。
+
+**4.中间件**
+
+在ASP.NET Core中，你可以使用中间件构建你的请求处理管道。 ASP.NET Core 中间件为一个HTTPContext执行异步逻辑，然后按照顺序调用下一个中间件或者直接终止请求。一般来说，要想使用一个中间件，只需要在Configure方法里调用IApplicationBuilder上一个对应的UserXXX扩展方法即可。ASP.NET Core内置中间组件：
+
+* 静态组件
+
+* 路由
+
+* 身份验证
+
+也可以创建自己的定义中间件，后面介绍这种方法。
+
+**5.配置**
+
+ASP .NET Core使用了一个新的配置模型，用来处理简单的键值对。新的配置模型不是基于System.Configuration或者web.config，相反它是一个有序拉取数据的配置providers。内置的构造提供多种不同的文件格式，如XML，JSON，INI和用于支持基于环境配置也可以实现自定义的providers
+
+
+
+
+
+
 
