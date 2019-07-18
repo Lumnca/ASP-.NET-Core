@@ -18,6 +18,6 @@ ASP .NET Core
 
 :checkered_flag:[基本配置](https://github.com/Lumnca/ASP-.NET-Core/blob/master/%E5%9F%BA%E6%9C%AC%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE.md)
 
-
+:checkered_flag:[依赖注入DI](https://github.com/Lumnca/ASP-.NET-Core/blob/master/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5DI.md)
 
 
