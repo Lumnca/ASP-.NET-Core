@@ -20,4 +20,4 @@ ASP .NET Core
 
 :checkered_flag:[依赖注入DI](https://github.com/Lumnca/ASP-.NET-Core/blob/master/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5DI.md)
 
-
+:checkered_flag:[应用程序状态](https://github.com/Lumnca/ASP-.NET-Core/blob/master/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%8A%B6%E6%80%81.md)
